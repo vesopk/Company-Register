@@ -1,0 +1,77 @@
+﻿@model EditInternDto
+@{
+    ViewData["Title"] = $"Edit {Model.Intern.Name}";
+}
+
+
+@if (ViewData.ContainsKey("edit"))
+{
+    <div class="alert alert-success text-center" style="width: 50%; margin: auto; margin-top: 55px; font-size: 20px;">
+        <strong>Success!</strong> @ViewData["edit"]
+    </div>
+}
+<div class="signup-form" style="margin-top: 15px;">
+    <form asp-controller="Interns" asp-route-id="@Model.Intern.Id" asp-action="Edit" method="post" style="border-top: 1px #EEEEEE solid">
+        <h2>Edit @Model.Intern.Name</h2>
+        <p>Please fill in this form to edit @Model.Intern.Name!</p>
+        <hr>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Intern.Name" disabled="disabled">
+                <input type="text" class="form-control" name="Name" placeholder="Name">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("Name")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Intern.StartDate.ToShortDateString()" disabled="disabled">
+                <input type="date" class="form-control" name="StartDate">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("StartDate")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Intern.Company.Name" disabled="disabled" />
+                <select class="form-control" name="CompanyId">
+                    <option disabled="disabled" selected>Select Company</option>
+                    @foreach (var company in Model.Companies)
+                    {
+                        <option value="@company.Id">@company.Name</option>
+                    }
+                </select>
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("CompanyId")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Intern.Salary" disabled="disabled">
+                <input type="number" class="form-control" name="Salary" placeholder="Salary">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("Salary")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Intern.DaysOfInternship" disabled="disabled">
+                <input type="number" class="form-control" name="DaysOfInternship" placeholder="Days of Internship">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("DaysOfInternship")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Intern.PictureUrl" disabled="disabled">
+                <input type="text" class="form-control" name="PictureUrl" placeholder="Picture Url">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("PictureUrl")</span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg" style="padding: 15px;">Save Changes</button>
+        </div>
+    </form>
+</div>
+

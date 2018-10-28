@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Employees Home";
+}
+
+@model List<Employee>
+
+<h2 id="compH">Welcome to the employees managing page!</h2>
+
+<div class="text-center">
+    <a id="registerButton" asp-controller="Employees" asp-action="Register" class="btn btn-success">Register An Employee</a>
+    <a id="listAllButton" asp-controller="Employees" asp-action="All" class="btn btn-info">All Employees</a>
+</div>
+<h3 style="margin-top: 25px;">Last few registered employees:</h3>
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>
+                    @employee.Name
+                </td>
+                <td>
+                    @employee.Company.Name
+                </td>
+                <td>
+                    @employee.Salary
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id" asp-route-slug="@employee.Name">Info</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4 style="margin-top: 25px;font-weight: bolder">There are no employees registered! Be the first one to register one?</h4>
+}

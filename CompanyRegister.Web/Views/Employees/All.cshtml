@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "All Employees";
+}
+@model List<Employee>
+<h2 id="compH">All Employees</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-hover" style="margin-top: 25px;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>Salary</th>
+                <th>Company</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model)
+            {
+                <tr>
+                    <td>
+                        @employee.Id
+                    </td>
+                    <td>
+                        @employee.Name
+                    </td>
+                    <td>
+                        @employee.StartDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @employee.Salary
+                    </td>
+                    <td>
+                        @employee.Company.Name
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id" asp-route-slug="@employee.Name">Info</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4 style="margin-top: 25px;font-weight: bolder">There are no employees registered! Be the first one to register one?</h4>
+}

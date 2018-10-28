@@ -1,0 +1,12 @@
+﻿@model Intern
+@{
+    ViewData["Title"] = $"Delete {Model.Name}";
+}
+
+<h2 style="text-align: center; margin-top: 55px;">Are you sure you want to delete @Model.Name?</h2>
+<div style="text-align: center; margin-top: 15px;">
+    <img src="@Model.PictureUrl" alt="Alternate Text" style="width: 400px;" />
+</div>
+<div style="text-align: center; margin-top: 15px;">
+    <a style="font-size: 25px;" class="btn btn-danger" asp-controller="Interns" asp-action="FinalDelete" asp-route-id="@Model.Id" asp-route-slug="@Model.Name">Delete</a>
+</div>

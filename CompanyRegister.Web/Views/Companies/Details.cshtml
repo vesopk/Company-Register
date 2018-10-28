@@ -1,0 +1,20 @@
+﻿
+@model Company
+@{
+    ViewData["Title"] = $"Details for {Model.Name}";
+}
+
+<h2 style="margin-top: 55px; text-align: center;">@ViewData["Title"]</h2>
+
+<ul class="list-group" style="width: 65%; margin: auto; margin-top: 25px;">
+    <li class="list-group-item"><strong>Id:</strong> @Model.Id</li>
+    <li class="list-group-item"><strong>Name:</strong> @Model.Name</li>
+    <li class="list-group-item"><strong>Foundation Date:</strong> @Model.FoundationDate.ToShortDateString()</li>
+    <li class="list-group-item"><img style="width: 50%" src="@Model.PictureUrl" /></li>
+</ul>
+<div class="text-center">
+    <a asp-controller="Companies" asp-action="CompanyEmployees" asp-route-id="@Model.Id" asp-route-slug="@Model.Name" class="btn btn-success specialButn">Show Employees</a>
+    <a asp-controller="Companies" asp-action="CompanyInterns" asp-route-id="@Model.Id" asp-route-slug="@Model.Name" class="btn btn-info specialButn">Show Interns</a>
+    <a asp-controller="Companies" asp-action="Edit" asp-route-id="@Model.Id" asp-route-slug="@Model.Name" class="btn btn-primary specialButn">Edit Company</a>
+    <a asp-controller="Companies" asp-action="Delete" asp-route-id="@Model.Id" asp-route-slug="@Model.Name" class="btn btn-danger specialButn">Delete Company</a>
+</div>

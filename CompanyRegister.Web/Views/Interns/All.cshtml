@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "All Interns";
+}
+@model List<Intern>
+<h2 id="compH">All Interns</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-hover" style="margin-top: 25px;">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Start Date</th>
+            <th>Salary</th>
+            <th>Company</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var intern in Model)
+        {
+            <tr>
+                <td>
+                    @intern.Id
+                </td>
+                <td>
+                    @intern.Name
+                </td>
+                <td>
+                    @intern.StartDate.ToShortDateString()
+                </td>
+                <td>
+                    @intern.Salary
+                </td>
+                <td>
+                    @intern.Company.Name
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Interns" asp-action="Details" asp-route-id="@intern.Id" asp-route-slug="@intern.Name">Info</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4 style="margin-top: 25px;font-weight: bolder">There are no interns registered! Be the first one to register one?</h4>
+}

@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+@model List<Company>
+
+@if (!Model.Any())
+{
+    <h2 id="compH">You cant register an empoyee while there are no companies!</h2>
+    <div style="margin-top: 25px;">
+        <a style="margin-left:40px;font-size: 25px; text-decoration: none; color: #19aa8d;" asp-controller="Companies" asp-action="Register">Be the first one to register a company?</a>
+    </div>
+}
+else
+{
+    <div class="signup-form" style="margin-top: 55px;">
+        <form asp-controller="Interns" asp-action="Register" method="post" style="border-top: 1px #EEEEEE solid">
+            <h2>Register an intern</h2>
+            <p>Please fill in this form to register an intern!</p>
+            <hr>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"></span>
+                    <input type="text" class="form-control" name="Name" placeholder="Name" required="required">
+                </div>
+                <span class="text-danger">@Html.ValidationMessage("Name")</span>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"></span>
+                    <input type="date" class="form-control" name="StartDate" placeholder="Start Date" required="required">
+                </div>
+                <span class="text-danger">@Html.ValidationMessage("StartDate")</span>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"></span>
+                    <select class="form-control" name="CompanyId" required="required">
+                        <option value="volvo" disabled="disabled" selected>Select Company</option>
+                        @foreach (var company in Model)
+                        {
+                            <option value="@company.Id">@company.Name</option>
+                        }
+                    </select>
+                </div>
+                <span class="text-danger">@Html.ValidationMessage("CompanyId")</span>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"></span>
+                    <input type="number" class="form-control" name="Salary" placeholder="Salary" required="required">
+                </div>
+                <span class="text-danger">@Html.ValidationMessage("Salary")</span>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"></span>
+                    <input type="number" class="form-control" name="DaysOfInternship" placeholder="Days of Internship" required="required">
+                </div>
+                <span class="text-danger">@Html.ValidationMessage("DaysOfInternship")</span>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"></span>
+                    <input type="text" class="form-control" name="PictureUrl" placeholder="Picture Url" required="required">
+                </div>
+                <span class="text-danger">@Html.ValidationMessage("PictureUrl")</span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg" style="padding: 15px;">Register</button>
+            </div>
+        </form>
+    </div>
+}
+

@@ -1,0 +1,85 @@
+﻿@model EditEmployeeDto
+@{
+    ViewData["Title"] = $"Edit {Model.Employee.Name}";
+}
+
+
+@if (ViewData.ContainsKey("edit"))
+{
+    <div class="alert alert-success text-center" style="width: 50%; margin: auto; margin-top: 55px; font-size: 20px;">
+        <strong>Success!</strong> @ViewData["edit"]
+    </div>
+}
+<div class="signup-form" style="margin-top: 15px;">
+    <form asp-controller="Employees" asp-route-id="@Model.Employee.Id" asp-action="Edit" method="post" style="border-top: 1px #EEEEEE solid">
+        <h2>Edit @Model.Employee.Name</h2>
+        <p>Please fill in this form to edit @Model.Employee.Name!</p>
+        <hr>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Employee.Name" disabled="disabled">
+                <input type="text" class="form-control" name="Name" placeholder="Name">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("Name")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Employee.StartDate.ToShortDateString()" disabled="disabled">
+                <input type="date" class="form-control" name="StartDate">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("StartDate")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Employee.Company.Name" disabled="disabled" />
+                <select class="form-control" name="CompanyId">
+                    <option disabled="disabled" selected>Select Company</option>
+                    @foreach (var company in Model.Companies)
+                    {
+                        <option value="@company.Id">@company.Name</option>
+                    }
+                </select>
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("CompanyId")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Employee.Salary" disabled="disabled">
+                <input type="number" class="form-control" name="Salary" placeholder="Salary">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("Salary")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Employee.ExperinceLevel" disabled="disabled">
+                <input type="text" class="form-control" name="ExperinceLevel" placeholder="Experince Level">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("ExperinceLevel")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Employee.VacationDays" disabled="disabled">
+                <input type="number" class="form-control" name="VacationDays" placeholder="Vacation Days">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("VacationDays")</span>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input type="text" class="form-control" placeholder="@Model.Employee.PictureUrl" disabled="disabled">
+                <input type="text" class="form-control" name="PictureUrl" placeholder="Picture Url">
+            </div>
+            <span class="text-danger">@Html.ValidationMessage("PictureUrl")</span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg" style="padding: 15px;">Save Changes</button>
+        </div>
+    </form>
+</div>
+

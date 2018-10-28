@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "All Companies";
+}
+@model List<Company>
+<h2 id="compH">All Companies</h2>
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Foundation Date</th>
+            <th>Empoyees Count</th>
+            <th>Interns Count</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var company in Model)
+        {
+            <tr>
+                <td>
+                    @company.Id
+                </td>
+                <td>
+                    @company.Name
+                </td>
+                <td>
+                    @company.FoundationDate.ToShortDateString()
+                </td>
+                <td>
+                    @company.Employees.Count()
+                </td>
+                <td>
+                    @company.Interns.Count()
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Companies" asp-action="Details" asp-route-id="@company.Id" asp-route-slug="@company.Name">Info</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4 style="margin-top: 25px;font-weight: bolder">There are no companies registered! Be the first one to register one?</h4>
+}

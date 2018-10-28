@@ -1,0 +1,18 @@
+﻿@model CompanyEmployeesViewModel
+@{
+    ViewData["Title"] = $"Employees of {Model.CompanyName}";
+}
+
+<h2 style="margin-top: 55px; text-align: center;">@ViewData["Title"]</h2>
+
+<div style="margin-top: 25px; width: 60%" class="container">
+    <div class="list-group">
+        @foreach (var employee in Model.Employees)
+        {
+            <a asp-controller="Employees" asp-action="Details" asp-route-id="@employee.Id" asp-route-slug="@employee.Name" class="list-group-item">
+                <h3 class="list-group-item-heading">Name: @employee.Name</h3>
+                <p class="list-group-item-text">Salary: @employee.Salary</p>
+            </a>
+        }
+    </div>
+</div>
